@@ -16,3 +16,12 @@ Outlines scale based on distance from camera.
 ![image](https://user-images.githubusercontent.com/9942055/147793354-dc9bb03c-8d6f-42e7-828d-3eb3fded4a0e.png)
 ![image](https://user-images.githubusercontent.com/9942055/147793396-1649e054-4322-4e2f-b176-d0fcd8c5d4ac.png)
 Outline width is customizable without the need for modifiers.
+
+![image](https://user-images.githubusercontent.com/9942055/147797204-7e771b6c-132b-4b93-98fa-5db6afd680a5.png)
+Xrd
+![image](https://user-images.githubusercontent.com/9942055/147797224-7400dd99-ffe6-40ff-84ee-9336dd81f190.png)
+FighterZ
+![image](https://user-images.githubusercontent.com/9942055/147797235-d3e3af4c-3a53-4d93-93fc-f48f963f05f6.png)
+Granblue
+![image](https://user-images.githubusercontent.com/9942055/147797197-32408340-15f0-426e-b748-83a267a7c143.png)
+Strive
