@@ -1,5 +1,5 @@
 # ArcSystemWorksShaderMalt
-A set of BlenderMalt shaders that replicate ArcSystemWorks shaders. Currently, only Guilty Gear -Strive- is supported.
+A set of BlenderMalt shaders that replicate ArcSystemWorks shaders. All released 3D ArcSys games are supported.
 
 BlenderMalt is obviously required to use this. Get it from here: https://github.com/bnpr/Malt/
 
