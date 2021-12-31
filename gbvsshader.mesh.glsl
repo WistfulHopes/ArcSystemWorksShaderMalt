@@ -9,10 +9,12 @@ uniform float shadow2_threshold = 0;
 uniform float permanent_shadow_threshold = 0.2;
 uniform vec3 light_dir;
 uniform vec3 highlight_rimlight_color;
-uniform float highlight_rimlight_size = 1;
+uniform float highlight_rimlight_size = 2;
 uniform vec3 shadow_rimlight_color;
-uniform float shadow_rimlight_size = 1;
+uniform float shadow_rimlight_size = 6.5;
 uniform float specular_size = 0.2;
+uniform vec4 light_color = vec4(0.5,0.5,0.5,1);
+uniform vec4 ambient_color = vec4(0.5,0.5,0.5,1);
 
 float LightCalculations(Surface S)
 {
@@ -81,6 +83,28 @@ vec3 ColorDodge(vec3 base, vec3 blend)
     return base / (1 - blend);
 }
 
+vec3 SoftLight(vec3 base, vec3 blend)
+{
+    return (1 - 2 * blend) * base * base + 2 * base * blend;
+}
+
+float HardLight(float base, float blend)
+{
+    if (blend > 0.5)
+    {
+        return 1 - 2 * (1 - base) * (1 - blend);
+    }
+    else
+    {
+        return (base * 2 * blend);
+    }
+}
+
+vec3 HardLight(vec3 base, vec3 blend)
+{
+    return vec3(HardLight(base.r, blend.r),HardLight(base.g, blend.g),HardLight(base.b, blend.b));
+}
+
 void COMMON_PIXEL_SHADER(Surface S, inout PixelOutput PO)
 {
 	float intensity = LightCalculations(S);
@@ -92,6 +116,8 @@ void COMMON_PIXEL_SHADER(Surface S, inout PixelOutput PO)
 
     base_color = base_color * base_color;
     sss_color = sss_color * sss_color;
+    base_color.rgb = HardLight(base_color.rgb, light_color.rgb);
+    sss_color.rgb = SoftLight(sss_color.rgb, ambient_color.rgb);
 
     vec3 cel_shading;
 
