@@ -9,9 +9,9 @@ uniform float shadow2_threshold = 0;
 uniform float permanent_shadow_threshold = 0.2;
 uniform vec3 light_dir;
 uniform vec3 highlight_rimlight_color;
-uniform float highlight_rimlight_size = 2;
+uniform float highlight_rimlight_size = 0.4;
 uniform vec3 shadow_rimlight_color;
-uniform float shadow_rimlight_size = 6.5;
+uniform float shadow_rimlight_size = 1.3;
 uniform float specular_size = 0.2;
 uniform vec4 light_color = vec4(0.5,0.5,0.5,1);
 uniform vec4 ambient_color = vec4(0.5,0.5,0.5,1);
@@ -20,6 +20,9 @@ float LightCalculations(Surface S)
 {
    	float intensity;
 	intensity = dot(normalize(light_dir),normalize(S.normal));
+    
+    intensity += 1;
+    intensity = intensity * 0.5;
 
     vec4 ilm_color = texture(ilm_texture, S.uv[0]);
     float ilm_shading = ilm_color.g;
@@ -40,7 +43,7 @@ float HiglightRimlight(Surface S, float base_alpha)
 {
     float intensity;
 
-    intensity = get_rim_light(360, highlight_rimlight_size, 0.4, 0.1);
+    intensity = get_rim_light(360, 2.0, highlight_rimlight_size, 0.1);
 
     intensity = intensity * base_alpha;
 
@@ -51,7 +54,7 @@ float ShadowRimlight(Surface S, float base_alpha)
 {
     float intensity;
 
-    intensity = get_rim_light(360, shadow_rimlight_size, 0.4, 0.1);
+    intensity = get_rim_light(360, 2.0, shadow_rimlight_size, 0.1);
 
     intensity = intensity * base_alpha;
 
@@ -127,7 +130,7 @@ void COMMON_PIXEL_SHADER(Surface S, inout PixelOutput PO)
         temp = Lerp(temp, base_color.rgb, 0.9);
     specular = specular * temp * ilm_color.r;
 
-    if(intensity >= shadow1_threshold)
+    if(intensity >= shadow1_threshold && ilm_color.g > permanent_shadow_threshold && S.color[0].r > shadow2_threshold)
         cel_shading = base_color.rgb + specular;
     else if (ilm_color.g > permanent_shadow_threshold && S.color[0].r > shadow2_threshold)
         cel_shading = sss_color.rgb;
