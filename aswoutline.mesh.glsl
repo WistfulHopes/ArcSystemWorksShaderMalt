@@ -3,7 +3,7 @@
 #include "Pipelines/NPR_Pipeline.glsl"
 
 uniform vec3 outline_color = vec3(0,0,0);
-uniform float line_scale = 1.0;
+uniform float line_scale = 0.5;
 
 void COMMON_VERTEX_SHADER(inout Surface S)
 {
