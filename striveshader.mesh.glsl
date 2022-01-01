@@ -57,7 +57,7 @@ vec3 ShadowRimlight(Surface S, float base_alpha)
 {
     float intensity;
 
-    intensity = get_rim_light(360, 0.2, shadow_rimlight_size, 0.1);
+    intensity = get_rim_light(360, 2, shadow_rimlight_size, 0.1);
 
     intensity = intensity * base_alpha;
 
